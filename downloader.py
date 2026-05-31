@@ -21,6 +21,9 @@ def download(url):
             'preferredquality': '192',
             },
             {
+                'key': 'FFmpegMetadata',  # Metadaten neu schreiben
+            },
+            {
                 'key': 'EmbedThumbnail',
             }],
 
