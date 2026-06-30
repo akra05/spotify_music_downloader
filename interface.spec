@@ -4,7 +4,7 @@
 a = Analysis(
     ['interface.py'],
     pathex=[],
-    binaries=[],
+    binaries=[('C:\\Program Files\\FFmpeg\\ffmpeg-7.1.1-essentials_build\\ffmpeg-7.1.1-essentials_build\\bin\\ffmpeg.exe', '.')],
     datas=[],
     hiddenimports=[],
     hookspath=[],
