@@ -12,6 +12,8 @@ if getattr(sys, 'frozen', False):
 else:
     BASE_DIR = Path(__file__).parent
 
+FFMPEG = BASE_DIR / "ffmpeg.exe"
+
 TEMP_DIR = Path(tempfile.gettempdir()) / 'music_downloader_temp'
 CONFIG_FILE = BASE_DIR / 'config.txt'
 DEFAULT_DOWNLOAD_DIR = BASE_DIR / 'download'
@@ -48,6 +50,7 @@ def download(url, progress_callback=None, download_dir=None):
             progress_callback("🔄 Konvertiere zu MP3...")
 
     ydl_opts = {
+        'ffmpeg_location': str(FFMPEG),
         'outtmpl': str(TEMP_DIR / '%(title)s.%(ext)s'),
         'writethumbnail': True,
         'progress_hooks': [progress_hook],
@@ -77,8 +80,9 @@ def download(url, progress_callback=None, download_dir=None):
             if progress_callback:
                 progress_callback("🔧 Finalisiere Datei...")
 
+
             subprocess.run([
-                'ffmpeg', '-y',
+                str(FFMPEG), '-y',
                 '-i', str(temp_mp3),
                 '-c:a', 'libmp3lame',
                 '-b:a', '192k',
